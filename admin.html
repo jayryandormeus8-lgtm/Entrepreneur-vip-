@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="ht"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Entrepreneur VIP</title>
+<style>
+:root{--b:#1B4FD6;--n:#0A2463;--c:#F6F1E4;--l:#E4DDCA;--i:#0E1B3D;--m:#47557A}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--c);color:var(--i)}
+.scr{display:none;padding:20px;max-width:760px;margin:0 auto}.scr.on{display:block}
+h1,h2,h3{margin:0 0 10px;color:var(--n)}h3{font-size:1rem}
+.card{background:#fff;border:1px solid var(--l);border-radius:14px;padding:16px;margin-bottom:12px}
+input,textarea{width:100%;padding:11px;border:1.5px solid var(--l);border-radius:10px;font:inherit;margin:4px 0 10px}
+textarea{min-height:80px}
+button,.bt{background:var(--b);color:#fff;border:0;border-radius:99px;padding:10px 18px;font:inherit;font-weight:700;cursor:pointer;margin:2px 4px 2px 0}
+button.g{background:#1FA855}button.r{background:#C0392B}button.o{background:#fff;color:var(--b);border:1.5px solid var(--b)}
+nav{position:sticky;top:0;background:var(--n);padding:8px;display:flex;gap:4px;overflow-x:auto;z-index:5}
+nav button{background:transparent;color:#cfd9ff;padding:8px 14px;margin:0;white-space:nowrap}nav button.on{background:#fff;color:var(--n)}
+.k{display:grid;grid-template-columns:1fr 1fr;gap:10px}.k b{font-size:1.8rem;display:block;color:var(--b)}
+.bar{display:flex;align-items:flex-end;gap:6px;height:110px}.bar div{flex:1;background:var(--b);border-radius:6px 6px 0 0;position:relative;min-height:2px}
+.bar span{position:absolute;top:-18px;left:0;right:0;text-align:center;font-size:.72rem}.d{display:flex;gap:6px;font-size:.7rem;color:var(--m)}.d span{flex:1;text-align:center}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.78rem;font-weight:700;background:var(--c)}
+.row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--l);padding:6px 0}small{color:var(--m)}
+</style></head><body>
+
+<section id="setup" class="scr"><div class="card"><h2>Konfigirasyon Firebase</h2>
+<p>Kole <b>firebaseConfig</b> ou a la (tout kòd ki sòti nan Firebase). Sa anrejistre sèlman sou telefòn sa a.</p>
+<textarea id="cfgtxt" placeholder='const firebaseConfig = { apiKey: "...", authDomain: "...", projectId: "..." };'></textarea>
+<button onclick="saveCfg()">Anrejistre</button></div></section>
+
+<section id="login" class="scr"><div class="card"><h2>Admin Entrepreneur VIP</h2><p>Konekte ak Gmail admin lan.</p><button onclick="login()">Konekte ak Google</button> <button class="o" onclick="resetCfg()">Chanje konfigirasyon</button></div></section>
+<section id="denied" class="scr"><div class="card"><h2>Aksè refize</h2><p>Gmail sa a pa admin.</p><button onclick="logout()">Chanje kont</button></div></section>
+
+<section id="app" style="display:none"><nav id="nav"></nav><div class="scr on" id="view"></div></section>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getFirestore,collection,doc,addDoc,setDoc,getDoc,getDocs,updateDoc,deleteDoc,query,orderBy,limit,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const ADMIN="jayryandormeus8@gmail.com",$=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let db,auth,tab="stats",M={},cfg=null;try{cfg=JSON.parse(localStorage.getItem("fbcfg"))}catch(e){}
+const show=id=>{document.querySelectorAll(".scr:not(#view)").forEach(s=>s.classList.toggle("on",s.id==id));$("#app").style.display=id=="app"?"block":"none"};
+window.saveCfg=()=>{const o={};[...$("#cfgtxt").value.matchAll(/(\w+)\s*:\s*["']([^"']+)["']/g)].forEach(m=>o[m[1]]=m[2]);if(!o.apiKey||!o.projectId)return alert("Kòd la pa bon. Kole tout firebaseConfig la.");localStorage.setItem("fbcfg",JSON.stringify(o));location.reload()};
+window.resetCfg=()=>{localStorage.removeItem("fbcfg");location.reload()};
+window.login=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>alert("Erè: "+e.message));
+window.logout=()=>signOut(auth);
+if(!cfg)show("setup");else{auth=getAuth(initializeApp(cfg));db=getFirestore();
+onAuthStateChanged(auth,u=>{if(!u)show("login");else if(u.email!==ADMIN)show("denied");else{show("app");go(tab)}})}
+const T={stats:"📊 Statistik",books:"📚 Liv",orders:"🧾 Kòmand",msgs:"💬 Mesaj",set:"⚙️ Paramèt"};
+window.go=t=>{tab=t;$("#nav").innerHTML=Object.entries(T).map(([k,v])=>`<button class="${k==t?"on":""}" onclick="go('${k}')">${v}</button>`).join("")+`<button onclick="logout()">Soti</button>`;$("#view").innerHTML="Ap chaje...";({stats,books,orders,msgs,set})[t]().catch(e=>$("#view").innerHTML=`<div class="card">Erè: ${esc(e.message)}<br><small>Verifye règ Firestore yo ak koneksyon an.</small></div>`)};
+
+async function stats(){
+const e=(await getDocs(query(collection(db,"events"),orderBy("ts","desc"),limit(3000)))).docs.map(d=>d.data());
+const day=n=>new Date(Date.now()-n*864e5).toISOString().slice(0,10),V=e.filter(x=>x.type=="view"),C=e.filter(x=>x.type=="click");
+const u=a=>new Set(a.map(x=>x.vid)).size,days=[6,5,4,3,2,1,0].map(n=>[day(n),V.filter(x=>x.day==day(n)).length]),mx=Math.max(1,...days.map(d=>d[1]));
+const cnt=(a,k)=>Object.entries(a.reduce((r,x)=>(r[x[k]]=(r[x[k]]||0)+1,r),{})).sort((a,b)=>b[1]-a[1]).slice(0,8);
+const list=a=>a.length?a.map(([k,n])=>`<div class="row"><span>${esc(k)}</span><b>${n}</b></div>`).join(""):"<small>Pa gen done ankò.</small>";
+$("#view").innerHTML=`<div class="k"><div class="card"><b>${u(V)}</b>Vizitè inik</div><div class="card"><b>${V.length}</b>Vizit total</div><div class="card"><b>${V.filter(x=>x.day==day(0)).length}</b>Vizit jodi a</div><div class="card"><b>${C.length}</b>Total klik</div></div>
+<div class="card"><h3>7 dènye jou</h3><div class="bar">${days.map(d=>`<div style="height:${d[1]/mx*100}%"><span>${d[1]}</span></div>`).join("")}</div><div class="d">${days.map(d=>`<span>${d[0].slice(5)}</span>`).join("")}</div></div>
+<div class="card"><h3>Sa moun klike plis</h3>${list(cnt(C,"target"))}</div><div class="card"><h3>Paj ki pi vizite</h3>${list(cnt(V,"page"))}</div><small>Baze sou 3000 dènye evènman yo.</small>`}
+
+async function books(){
+const s=await getDocs(query(collection(db,"books"),orderBy("createdAt","desc")));
+$("#view").innerHTML=`<div class="card"><h3 id="ft">Ajoute yon liv</h3><input type="hidden" id="bid"><label>Non liv la</label><input id="bt"><label>Pri (egzanp 500 HTG)</label><input id="bp"><label>Deskripsyon</label><textarea id="bd"></textarea><label>Lyen foto kouvèti (URL oswa images/liv1.jpg)</label><input id="bc"><label>Lyen PDF (Google Drive, sekrè)</label><input id="bl"><button onclick="saveBook()">Anrejistre</button><button class="o" onclick="go('books')">Anile</button></div>`+
+s.docs.map(d=>{const b=d.data();return`<div class="card"><b>${esc(b.title)}</b> <span class="tag">${esc(b.price)}</span><br><small>${esc(b.desc)}</small><br><button class="o" onclick="editBook('${d.id}')">Modifye</button><button class="r" onclick="delBook('${d.id}')">Efase</button></div>`}).join("")}
+window.editBook=async id=>{const b=(await getDoc(doc(db,"books",id))).data(),f=await getDoc(doc(db,"files",id));$("#bid").value=id;$("#bt").value=b.title;$("#bp").value=b.price;$("#bd").value=b.desc;$("#bc").value=b.cover||"";$("#bl").value=f.exists()?f.data().link:"";$("#ft").textContent="Modifye liv";scrollTo(0,0)};
+window.saveBook=async()=>{const d={title:$("#bt").value.trim(),price:$("#bp").value.trim(),desc:$("#bd").value.trim(),cover:$("#bc").value.trim()};if(!d.title)return alert("Mete non liv la");let id=$("#bid").value;
+if(id)await updateDoc(doc(db,"books",id),d);else id=(await addDoc(collection(db,"books"),{...d,createdAt:serverTimestamp()})).id;
+await setDoc(doc(db,"files",id),{link:$("#bl").value.trim()});go("books")};
+window.delBook=async id=>{if(confirm("Efase liv sa a?")){await deleteDoc(doc(db,"books",id));await deleteDoc(doc(db,"files",id));go("books")}};
+
+async function orders(){
+const s=await getDocs(query(collection(db,"orders"),orderBy("createdAt","desc"),limit(100)));
+$("#view").innerHTML=s.empty?"<div class='card'>Pa gen kòmand ankò.</div>":s.docs.map(d=>{const o=d.data(),p=o.status=="pending";return`<div class="card"><span class="tag">${p?"⏳ An atant":o.status=="approved"?"✅ Apwouve":"❌ Rejte"}</span><br><b>${esc(o.bookTitle)}</b> · ${esc(o.amount)}<br>${esc(o.name)} · ${esc(o.email)}<br>WhatsApp: ${esc(o.whatsapp)}<br>ID tranzaksyon: <b>${esc(o.txId)}</b><br>${p?`<button class="g" onclick="setOrder('${d.id}','approved')">Apwouve</button><button class="r" onclick="setOrder('${d.id}','rejected')">Rejte</button>`:""}</div>`}).join("")}
+window.setOrder=async(id,st)=>{if(!confirm(st=="approved"?"Ou verifye peman an nan MonCash/NatCash?":"Rejte kòmand lan?"))return;const o=(await getDoc(doc(db,"orders",id))).data();await updateDoc(doc(db,"orders",id),{status:st});if(st=="approved")await setDoc(doc(db,"users",o.userId,"library",o.bookId),{title:o.bookTitle,at:serverTimestamp()});go("orders")};
+
+async function msgs(){
+const s=await getDocs(query(collection(db,"messages"),orderBy("createdAt","desc"),limit(100)));M={};s.docs.forEach(d=>M[d.id]=d.data());
+$("#view").innerHTML=s.empty?"<div class='card'>Pa gen mesaj ankò.</div>":s.docs.map(d=>{const m=d.data();return`<div class="card"><span class="tag">${m.replied?"✅ Reponn":"🆕 Nouvo"}</span><br><b>${esc(m.name)}</b><br><small>${esc(m.email)} · ${esc(m.whatsapp)}</small><p>${esc(m.text)}</p>${m.reply?`<small>Repons ou: ${esc(m.reply)}</small>`:""}<textarea id="r_${d.id}" placeholder="Ekri repons ou..."></textarea><button class="g" onclick="reply('${d.id}','wa')">Voye sou WhatsApp</button><button onclick="reply('${d.id}','mail')">Voye pa imèl</button></div>`}).join("")}
+window.reply=(id,how)=>{const m=M[id],t=$("#r_"+id).value.trim();if(!t)return alert("Ekri repons lan anvan");
+if(how=="wa"){let p=String(m.whatsapp||"").replace(/\D/g,"");if(p.length==8)p="509"+p;if(!p)return alert("Kliyan an pa kite nimewo WhatsApp");window.open("https://wa.me/"+p+"?text="+encodeURIComponent(t))}
+else{if(!m.email)return alert("Kliyan an pa kite imèl");location.href="mailto:"+m.email+"?subject="+encodeURIComponent("Repons Entrepreneur VIP")+"&body="+encodeURIComponent(t)}
+updateDoc(doc(db,"messages",id),{replied:true,reply:t}).then(()=>setTimeout(()=>go("msgs"),1500))};
+
+async function set(){
+const s=await getDoc(doc(db,"settings","payment")),p=s.exists()?s.data():{};
+$("#view").innerHTML=`<div class="card"><h3>Enfòmasyon peman yo (kliyan yo wè yo)</h3><label>MonCash (nimewo + non)</label><input id="s1" value="${esc(p.moncash)}"><label>NatCash (nimewo + non)</label><input id="s2" value="${esc(p.natcash||"+509 5573-0496 DORMEUS Jay-Ryan")}"><label>WhatsApp</label><input id="s3" value="${esc(p.whatsapp||"+509 4430-0377")}"><label>Imèl</label><input id="s4" value="${esc(p.email||ADMIN)}"><button onclick="saveSet()">Anrejistre</button></div>`}
+window.saveSet=async()=>{await setDoc(doc(db,"settings","payment"),{moncash:$("#s1").value,natcash:$("#s2").value,whatsapp:$("#s3").value,email:$("#s4").value});alert("Anrejistre ✅")};
+</script></body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entrepreneur VIP | Ebook pou antreprenè</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--cream:#F6F1E4;--ink:#0E1B3D;--mut:#47557A;--blue:#1B4FD6;--btn:#1B4FD6;--navy:#0A2463;--line:#E4DDCA;--r:14px;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1430;--cream:#111E45;--ink:#F3EFE2;--mut:#B5C0DE;--blue:#7FA0FF;--line:#22305E}}
+:root[data-theme="dark"]{--bg:#0B1430;--cream:#111E45;--ink:#F3EFE2;--mut:#B5C0DE;--blue:#7FA0FF;--line:#22305E}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{line-height:1.12;margin:0 0 .5em;letter-spacing:-.02em}
+h1{font-size:clamp(2.1rem,7vw,3.8rem);font-weight:800}
+h2{font-size:clamp(1.6rem,4.5vw,2.3rem);font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0 0 1em;max-width:62ch}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 20px}
+.logo{font-weight:800;font-size:1.15rem;text-decoration:none;color:var(--navy)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo{color:var(--ink)}}
+:root[data-theme="dark"] .logo{color:var(--ink)}
+.logo b{background:var(--btn);color:#fff;border-radius:6px;padding:1px 7px;margin-left:4px}
+nav{display:flex;gap:4px}
+nav a{padding:8px 12px;border-radius:99px;text-decoration:none;font-weight:500;font-size:.95rem;color:var(--mut)}
+nav a[aria-current="page"]{background:var(--cream);color:var(--ink);font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:99px;background:var(--btn);color:#fff;font-weight:700;text-decoration:none;border:2px solid var(--btn);font:inherit;font-weight:700;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.wa{background:#1FA855;border-color:#1FA855}
+.btn:focus-visible,nav a:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+svg{width:20px;height:20px;flex:none}
+section.blk{padding:56px 0}
+.cream{background:var(--cream)}
+.hero{background:var(--navy);color:#fff;padding:56px 0 64px;overflow:hidden}
+.hero .wrap{display:grid;gap:40px;align-items:center}
+.hero p{color:#D6E0FF;font-size:1.1rem}
+.hero .btn.alt{color:#fff;border-color:#fff}
+.stack{position:relative;height:290px;max-width:360px;width:100%;margin:0 auto}
+.cover{position:absolute;width:170px;height:238px;border-radius:6px 12px 12px 6px;padding:16px 14px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 14px 30px rgba(0,0,0,.28);border-left:8px solid rgba(0,0,0,.22);color:#fff}
+.cover small{font-size:.65rem;opacity:.85;font-weight:700}
+.cover strong{font-size:1.05rem;line-height:1.15}
+.c1{background:linear-gradient(160deg,#2E63F0,#12338F);left:0;top:30px;transform:rotate(-8deg)}
+.c2{background:linear-gradient(160deg,#F6F1E4,#DCD2B4);color:var(--navy);left:90px;top:0;z-index:2;border-left-color:rgba(10,36,99,.25)}
+.c3{background:linear-gradient(160deg,#0A2463,#071845);left:182px;top:40px;transform:rotate(7deg);border:1px solid #3a58b5;border-left-width:8px}
+.grid{display:grid;gap:18px}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.cream .card{background:var(--bg)}
+.icon{width:44px;height:44px;border-radius:12px;background:var(--cream);color:var(--blue);display:grid;place-items:center;margin-bottom:14px}
+.cream .icon{background:var(--cream)}
+.icon svg{width:24px;height:24px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start}
+.steps li::before{content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--btn);color:#fff;display:grid;place-items:center;font-weight:800}
+.photo{border-radius:var(--r);min-height:260px;background:linear-gradient(135deg,#1B4FD6,#0A2463);display:grid;place-items:center;color:#fff;text-align:center;padding:24px;position:relative;overflow:hidden}
+.photo span{font-size:.85rem;opacity:.9;max-width:26ch}
+.photo::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(246,241,228,.12);right:-60px;top:-60px}
+.price{font-weight:800;color:var(--blue)}
+.cta{background:var(--navy);color:#fff;border-radius:20px;padding:36px 24px;text-align:center}
+.cta p{margin-inline:auto;color:#D6E0FF}
+.cta .row{justify-content:center}
+label{display:block;font-weight:700;margin:0 0 6px;font-size:.92rem}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:16px}
+textarea{min-height:120px;resize:vertical}
+.social{display:flex;gap:10px;flex-wrap:wrap}
+.social a{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1.5px solid var(--line);border-radius:99px;text-decoration:none;font-weight:700;background:var(--bg)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:.9rem}
+footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+[hidden]{display:none!important}
+.wafloat{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;width:56px;height:56px;border-radius:50%;background:#1FA855;color:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.wafloat svg{width:28px;height:28px}
+@media(min-width:760px){.hero .wrap{grid-template-columns:1.2fr 1fr}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.hero{padding:84px 0}}
+@media(max-width:420px){nav a{padding:8px 9px;font-size:.88rem}}
+@media(prefers-reduced-motion:no-preference){.stack .cover{transition:transform .25s}.stack:hover .c1{transform:rotate(-12deg) translateX(-6px)}.stack:hover .c3{transform:rotate(11deg) translateX(6px)}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="bar">
+<a class="logo" href="#home" aria-label="Entrepreneur VIP, akèy">Entrepreneur<b>VIP</b></a>
+<nav aria-label="Navigasyon prensipal">
+<a href="#home">Akèy</a><a href="#about">Sou nou</a><a href="#services">Sèvis</a><a href="#contact">Kontak</a>
+</nav>
+</div>
+</header>
+
+<main>
+<!-- AKÈY -->
+<div id="home" class="page">
+<section class="hero"><div class="wrap">
+<div>
+<h1>Konesans ki ka fè biznis ou grandi, nan yon ebook.</h1>
+<p>Entrepreneur VIP vann ebook pratik pou antreprenè: kijan pou kòmanse, jere lajan, epi vann plis. Ou resevwa yo dirèkteman sou telefòn ou.</p>
+<div class="row">
+<a class="btn wa" data-wa="Bonjou, mwen enterese nan ebook yo." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg>Kontakte nou sou WhatsApp</a>
+<a class="btn alt" href="#services">Gade sèvis yo</a>
+</div>
+</div>
+<div class="stack" role="img" aria-label="Twa kouvèti ebook">
+<div class="cover c1"><small>EBOOK</small><strong>Kòmanse Biznis ou</strong><small>Entrepreneur VIP</small></div>
+<div class="cover c2"><small>EBOOK</small><strong>Lajan ak Disiplin</strong><small>Entrepreneur VIP</small></div>
+<div class="cover c3"><small>EBOOK</small><strong>Vann sou Entènèt</strong><small>Entrepreneur VIP</small></div>
+</div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+<h2>Poukisa chwazi Entrepreneur VIP?</h2>
+<div class="grid g3">
+<div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg></div><h3>Kontni ki pratik</h3><p>Chak ebook ba ou etap ou ka aplike jodi a, pa jis teyori.</p></div>
+<div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>Li sou telefòn</h3><p>Fichye yo fèt pou ekran telefòn. Ou pa bezwen enprime anyen.</p></div>
+<div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg></div><h3>Livrezon rapid</h3><p>Apre peman, ou resevwa ebook la sou WhatsApp san ou pa tann lontan.</p></div>
+</div>
+</div></section>
+
+<section class="blk cream"><div class="wrap">
+<h2>Ebook nou yo</h2>
+<div class="grid g3">
+<div class="card"><h3>Kòmanse Biznis ou</h3><p>Idé, plan ak premye kliyan, etap pa etap.</p><span class="price">Mande pri</span></div>
+<div class="card"><h3>Lajan ak Disiplin</h3><p>Aprann separe lajan biznis la ak lajan pèsonèl ou.</p><span class="price">Mande pri</span></div>
+<div class="card"><h3>Vann sou Entènèt</h3><p>Itilize WhatsApp ak rezo sosyal pou jwenn kliyan.</p><span class="price">Mande pri</span></div>
+</div>
+</div></section>
+
+<section class="blk"><div class="wrap"><div class="cta">
+<h2>Pare pou w kòmanse?</h2>
+<p>Ekri nou, di nou ki ebook ou bezwen, epi nou reponn ou rapid.</p>
+<div class="row">
+<a class="btn wa" data-wa="Bonjou, mwen vle achte yon ebook." target="_blank" rel="noopener">Ekri nou sou WhatsApp</a>
+<a class="btn alt" style="color:#fff;border-color:#fff" href="#contact">Ranpli fòm kontak</a>
+</div></div></div></section>
+</div>
+
+<!-- SOU NOU -->
+<div id="about" class="page" hidden>
+<section class="blk"><div class="wrap grid g2" style="align-items:center">
+<div>
+<h2>Nou ede antreprenè aprann pi vit.</h2>
+<p>Entrepreneur VIP se yon bibliyotèk ebook ki fèt pou moun ki vle bati yon biznis solid. Nou pran konesans ki difisil pou jwenn, nou mete l nan lang senp, epi nou livre l bay ou kote ou ye.</p>
+<p>Misyon nou: bay chak antreprenè aksè a bon enfòmasyon, san li pa bezwen depanse anpil.</p>
+</div>
+<div class="photo"><span>Foto ekip la oswa foto pwodwi a ale isit la</span></div>
+</div></section>
+<section class="blk cream"><div class="wrap">
+<h2>Sa nou kwè</h2>
+<div class="grid g3">
+<div class="card"><h3>Senplisite</h3><p>Mo senp, egzanp reyèl, pa gen pawòl initil.</p></div>
+<div class="card"><h3>Rezilta</h3><p>Yon ebook bon si ou ka itilize l pou fè pwogrè.</p></div>
+<div class="card"><h3>Aksè</h3><p>Pri ki rezonab ak livrezon sou telefòn ou.</p></div>
+</div>
+</div></section>
+</div>
+
+<!-- SÈVIS -->
+<div id="services" class="page" hidden>
+<section class="blk"><div class="wrap">
+<h2>Sèvis nou yo</h2>
+<div class="grid g3">
+<div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/></svg></div><h3>Ebook pare pou li</h3><p>Chwazi nan katalòg nou. Ou peye, epi ou resevwa fichye a sou WhatsApp.</p><span class="price">Mande pri</span></div>
+<div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><h3>Ebook sou mezi</h3><p>Ou gen yon sijè? Nou ede ou ekri ebook pa ou, soti nan plan jiska fichye final la.</p><span class="price">Mande kotasyon</span></div>
+<div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg></div><h3>Kouvèti ak piblikasyon</h3><p>Nou fè kouvèti a, nou mete fòma a an òd, epi nou ede ou vann ebook ou.</p><span class="price">Mande kotasyon</span></div>
+</div>
+</div></section>
+<section class="blk cream"><div class="wrap grid g2" style="align-items:center">
+<div><h2>Kijan sa mache</h2>
+<ol class="steps">
+<li><div><h3 style="margin:0">Chwazi ebook la</h3>Di nou sa ou bezwen sou WhatsApp.</div></li>
+<li><div><h3 style="margin:0">Fè peman an</h3>Nou voye enstriksyon yo ba ou.</div></li>
+<li><div><h3 style="margin:0">Resevwa fichye a</h3>Ou jwenn ebook la sou telefòn ou.</div></li>
+</ol></div>
+<div class="photo"><span>Foto sèvis la ale isit la</span></div>
+</div></section>
+</div>
+
+<!-- KONTAK -->
+<div id="contact" class="page" hidden>
+<section class="blk"><div class="wrap grid g2">
+<div>
+<h2>Kontakte nou</h2>
+<p>Ranpli fòm nan. Mesaj ou ap louvri nan WhatsApp, epi nou reponn ou rapid.</p>
+<label for="n">Non ou</label><input id="n" autocomplete="name" placeholder="Non konplè">
+<label for="t">Telefòn oswa imèl</label><input id="t" autocomplete="tel" placeholder="Nimewo oswa imèl">
+<label for="m">Mesaj</label><textarea id="m" placeholder="Ki ebook oswa ki sèvis ou enterese?"></textarea>
+<a id="send" class="btn wa" target="_blank" rel="noopener">Voye sou WhatsApp</a>
+</div>
+<div>
+<h2>Jwenn nou sou rezo yo</h2>
+<p>Pi rapid pou rive jwenn nou se WhatsApp: +509 4430-0377<br>Imèl: <a href="mailto:jayryandormeus8@gmail.com">jayryandormeus8@gmail.com</a></p>
+<div class="social">
+<a data-wa="Bonjou, mwen vle plis enfòmasyon." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#1FA855" stroke-width="2" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg>WhatsApp</a>
+<a href="https://www.instagram.com/entrepreneur_vip23" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>Instagram</a>
+<a href="https://x.com/JayRyan86203" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l16 16M20 4L4 20"/></svg>Twitter</a>
+<a href="https://whatsapp.com/channel/0029VbDcnniBVJkvaVEYGt08" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#1FA855" stroke-width="2" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg>Chèn WhatsApp</a>
+<a href="mailto:jayryandormeus8@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Imèl</a>
+</div>
+<div class="photo" style="margin-top:24px;min-height:180px"><span>Foto biwo oswa ekip la ale isit la</span></div>
+</div>
+</div></section>
+</div>
+</main>
+
+<a class="wafloat" data-wa="Bonjou, mwen vle plis enfòmasyon." target="_blank" rel="noopener" aria-label="Ekri nou sou WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg></a>
+
+<footer><div class="wrap"><span>© 2026 Entrepreneur VIP. Tout dwa rezève.</span><span><a href="https://www.instagram.com/entrepreneur_vip23" target="_blank" rel="noopener">Instagram</a> · <a href="https://x.com/JayRyan86203" target="_blank" rel="noopener">Twitter</a> · <a href="https://whatsapp.com/channel/0029VbDcnniBVJkvaVEYGt08" target="_blank" rel="noopener">Chèn WhatsApp</a> · <a href="mailto:jayryandormeus8@gmail.com">Imèl</a></span></div></footer>
+
+<script>
+// Nimewo WhatsApp (kòd peyi + nimewo, san + ni espas)
+var WA="50944300377";
+var pages=["home","about","services","contact"];
+function wa(t){return "https://wa.me/"+WA+"?text="+encodeURIComponent(t)}
+document.querySelectorAll("[data-wa]").forEach(function(a){a.href=wa(a.dataset.wa)});
+function route(){
+  var h=location.hash.slice(1);if(pages.indexOf(h)<0)h="home";
+  pages.forEach(function(p){document.getElementById(p).hidden=(p!==h)});
+  document.querySelectorAll("nav a").forEach(function(a){
+    if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+  });
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);route();
+var f=["n","t","m"].map(function(i){return document.getElementById(i)});
+function upd(){
+  var msg="Bonjou, mwen se "+(f[0].value||"...")+". Kontak mwen: "+(f[1].value||"...")+". "+f[2].value;
+  document.getElementById("send").href=wa(msg);
+}
+f.forEach(function(e){e.addEventListener("input",upd)});upd();
+</script>
+</body>
+</html>
