@@ -34,7 +34,7 @@ import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}fro
 import{getFirestore,collection,doc,addDoc,setDoc,getDoc,getDocs,updateDoc,deleteDoc,query,orderBy,limit,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 const ADMIN="jayryandormeus8@gmail.com",$=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let db,auth,tab="stats",M={},cfg=null;try{cfg=JSON.parse(localStorage.getItem("fbcfg"))}catch(e){}
+const DEF={apiKey:"AIzaSyARG9qhrP5H8nya0mF6-AeafJri4vdZRqg",authDomain:"entrepreneur-vip.firebaseapp.com",projectId:"entrepreneur-vip",storageBucket:"entrepreneur-vip.firebasestorage.app",messagingSenderId:"265935649142",appId:"1:265935649142:web:c5efc14ad49cdf1246a257"};let db,auth,tab="stats",M={},cfg=null;try{cfg=JSON.parse(localStorage.getItem("fbcfg"))}catch(e){}cfg=cfg||DEF;
 const show=id=>{document.querySelectorAll(".scr:not(#view)").forEach(s=>s.classList.toggle("on",s.id==id));$("#app").style.display=id=="app"?"block":"none"};
 window.saveCfg=()=>{const o={};[...$("#cfgtxt").value.matchAll(/(\w+)\s*:\s*["']([^"']+)["']/g)].forEach(m=>o[m[1]]=m[2]);if(!o.apiKey||!o.projectId)return alert("Kòd la pa bon. Kole tout firebaseConfig la.");localStorage.setItem("fbcfg",JSON.stringify(o));location.reload()};
 window.resetCfg=()=>{localStorage.removeItem("fbcfg");location.reload()};
