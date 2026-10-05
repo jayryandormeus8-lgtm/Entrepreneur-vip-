@@ -78,6 +78,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:cen
 @media(min-width:760px){.hero .wrap{grid-template-columns:1.2fr 1fr}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.hero{padding:84px 0}}
 @media(max-width:420px){nav a{padding:8px 9px;font-size:.88rem}}
 @media(prefers-reduced-motion:no-preference){.stack .cover{transition:transform .25s}.stack:hover .c1{transform:rotate(-12deg) translateX(-6px)}.stack:hover .c3{transform:rotate(11deg) translateX(6px)}}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal.on{display:flex}.modal .box{background:var(--bg);color:var(--ink);border-radius:var(--r);padding:22px;max-width:440px;width:100%;max-height:90vh;overflow:auto}.cover-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;margin-bottom:10px;background:var(--cream)}
 </style>
 </head>
 <body>
@@ -86,7 +87,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:cen
 <div class="bar">
 <a class="logo" href="#home" aria-label="Entrepreneur VIP, akèy">Entrepreneur<b>VIP</b></a>
 <nav aria-label="Navigasyon prensipal">
-<a href="#home">Akèy</a><a href="#about">Sou nou</a><a href="#services">Sèvis</a><a href="#contact">Kontak</a>
+<a href="#home">Akèy</a><a href="#about">Sou nou</a><a href="#services">Sèvis</a><a href="#contact">Kontak</a><a href="#library">Kont mwen</a>
 </nav>
 </div>
 </header>
@@ -121,11 +122,8 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:cen
 
 <section class="blk cream"><div class="wrap">
 <h2>Ebook nou yo</h2>
-<div class="grid g3">
-<div class="card"><h3>Kòmanse Biznis ou</h3><p>Idé, plan ak premye kliyan, etap pa etap.</p><span class="price">Mande pri</span></div>
-<div class="card"><h3>Lajan ak Disiplin</h3><p>Aprann separe lajan biznis la ak lajan pèsonèl ou.</p><span class="price">Mande pri</span></div>
-<div class="card"><h3>Vann sou Entènèt</h3><p>Itilize WhatsApp ak rezo sosyal pou jwenn kliyan.</p><span class="price">Mande pri</span></div>
-</div>
+<div class="grid g3" id="homeBooks"><p>Ap chaje...</p></div>
+<p style="margin-top:18px"><a class="btn alt" href="#services">Wè tout katalòg la</a></p>
 </div></section>
 
 <section class="blk"><div class="wrap"><div class="cta">
@@ -159,6 +157,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:cen
 
 <!-- SÈVIS -->
 <div id="services" class="page" hidden>
+<section class="blk cream"><div class="wrap"><h2>Katalòg ebook yo</h2><div class="grid g3" id="catalog"><p>Ap chaje...</p></div></div></section>
 <section class="blk"><div class="wrap">
 <h2>Sèvis nou yo</h2>
 <div class="grid g3">
@@ -178,6 +177,8 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:cen
 </div></section>
 </div>
 
+<div id="library" class="page" hidden><section class="blk"><div class="wrap"><h2>Kont mwen</h2><div id="mine"></div></div></section></div>
+
 <!-- KONTAK -->
 <div id="contact" class="page" hidden>
 <section class="blk"><div class="wrap grid g2">
@@ -185,9 +186,10 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:cen
 <h2>Kontakte nou</h2>
 <p>Ranpli fòm nan. Mesaj ou ap louvri nan WhatsApp, epi nou reponn ou rapid.</p>
 <label for="n">Non ou</label><input id="n" autocomplete="name" placeholder="Non konplè">
-<label for="t">Telefòn oswa imèl</label><input id="t" autocomplete="tel" placeholder="Nimewo oswa imèl">
+<label for="t">WhatsApp ou</label><input id="t" autocomplete="tel" placeholder="Nimewo WhatsApp">
+<label for="e">Imèl ou</label><input id="e" type="email" autocomplete="email" placeholder="imèl ou">
 <label for="m">Mesaj</label><textarea id="m" placeholder="Ki ebook oswa ki sèvis ou enterese?"></textarea>
-<a id="send" class="btn wa" target="_blank" rel="noopener">Voye sou WhatsApp</a>
+<button id="msgbtn" class="btn" type="button">Voye mesaj la</button> <a id="send" class="btn wa" target="_blank" rel="noopener">Voye sou WhatsApp</a>
 </div>
 <div>
 <h2>Jwenn nou sou rezo yo</h2>
@@ -212,7 +214,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;align-items:cen
 <script>
 // Nimewo WhatsApp (kòd peyi + nimewo, san + ni espas)
 var WA="50944300377";
-var pages=["home","about","services","contact"];
+var pages=["home","about","services","contact","library"];
 function wa(t){return "https://wa.me/"+WA+"?text="+encodeURIComponent(t)}
 document.querySelectorAll("[data-wa]").forEach(function(a){a.href=wa(a.dataset.wa)});
 function route(){
@@ -230,6 +232,45 @@ function upd(){
   document.getElementById("send").href=wa(msg);
 }
 f.forEach(function(e){e.addEventListener("input",upd)});upd();
+</script>
+<div class="modal" id="ord"><div class="box"><h3 id="oT"></h3><div id="oForm"><p>1. Peye nan MonCash oswa NatCash:</p><p id="oP"></p><p>2. Ranpli enfòmasyon yo:</p><label>Non ou</label><input id="oN"><label>WhatsApp ou</label><input id="oW" type="tel"><label>ID tranzaksyon peman an</label><input id="oX"><button class="btn" onclick="sendOrder()">Mwen peye</button> <button class="btn alt" onclick="closeO()">Anile</button></div><div id="oDone" hidden><p>✅ Kòmand ou an atant. Nou pral verifye peman an, epi liv la ap parèt nan <b>Kont mwen</b>.</p><a id="oWA" class="btn wa" target="_blank" rel="noopener">Voye prèv sou WhatsApp</a> <button class="btn alt" onclick="closeO()">Fèmen</button></div></div></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getFirestore,collection,doc,addDoc,getDoc,getDocs,query,orderBy,where,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyARG9qhrP5H8nya0mF6-AeafJri4vdZRqg",authDomain:"entrepreneur-vip.firebaseapp.com",projectId:"entrepreneur-vip",storageBucket:"entrepreneur-vip.firebasestorage.app",messagingSenderId:"265935649142",appId:"1:265935649142:web:c5efc14ad49cdf1246a257"});
+const auth=getAuth(app),db=getFirestore(app),$=q=>document.querySelector(q);
+const esc=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let user=null,B={},P={},cur=null,vid="x"+Math.random().toString(36).slice(2);
+try{vid=localStorage.getItem("vid")||vid;localStorage.setItem("vid",vid)}catch(e){}
+const track=(type,target)=>addDoc(collection(db,"events"),{type,page:location.hash.slice(1)||"home",target:target||"",vid,day:new Date().toISOString().slice(0,10),ts:serverTimestamp()}).catch(()=>{});
+track("view");addEventListener("hashchange",()=>track("view"));
+document.addEventListener("click",e=>{const el=e.target.closest("a,button");if(el)track("click",(el.dataset.t||el.textContent||el.getAttribute("aria-label")||"lyen").replace(/\s+/g," ").trim().slice(0,40))});
+const card=b=>`<div class="card">${b.cover?`<img class="cover-img" src="${esc(b.cover)}" alt="${esc(b.title)}" loading="lazy">`:""}<h3>${esc(b.title)}</h3><p>${esc(b.desc)}</p><p class="price">${esc(b.price)}</p><button class="btn" data-t="Kòmande ${esc(b.title)}" onclick="order('${b.id}')">Kòmande</button></div>`;
+(async()=>{try{const l=(await getDocs(query(collection(db,"books"),orderBy("createdAt","desc")))).docs.map(d=>({id:d.id,...d.data()}));l.forEach(b=>B[b.id]=b);
+$("#catalog").innerHTML=l.length?l.map(card).join(""):"<p>Ebook yo ap vini talè. Ekri nou sou WhatsApp pou plis enfòmasyon.</p>";
+$("#homeBooks").innerHTML=l.length?l.slice(0,3).map(card).join(""):"<p>Ebook yo ap vini talè.</p>"}catch(e){$("#catalog").innerHTML=$("#homeBooks").innerHTML="<p>Katalòg la pa disponib kounye a.</p>"}
+try{const s=await getDoc(doc(db,"settings","payment"));P=s.exists()?s.data():{}}catch(e){}})();
+window.login=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>alert("Erè koneksyon: "+e.code));
+window.logout=()=>signOut(auth);
+window.order=async id=>{if(!user){try{await signInWithPopup(auth,new GoogleAuthProvider());user=auth.currentUser}catch(e){return alert("Ou dwe konekte ak Google pou kòmande.")}}
+const b=B[id];if(!b)return;cur=b;$("#oT").textContent=b.title+" · "+b.price;
+$("#oP").innerHTML=`MonCash: <b>${esc(P.moncash||"mande nou nimewo a sou WhatsApp")}</b><br>NatCash: <b>${esc(P.natcash||"+509 5573-0496 DORMEUS Jay-Ryan")}</b>`;
+$("#oN").value=user.displayName||"";$("#oForm").hidden=false;$("#oDone").hidden=true;$("#ord").classList.add("on")};
+window.closeO=()=>$("#ord").classList.remove("on");
+window.sendOrder=async()=>{const n=$("#oN").value.trim(),w=$("#oW").value.trim(),x=$("#oX").value.trim();if(!n||!w||!x)return alert("Ranpli tout chan yo.");
+try{await addDoc(collection(db,"orders"),{userId:user.uid,email:user.email,name:n,whatsapp:w,bookId:cur.id,bookTitle:cur.title,amount:cur.price,txId:x,status:"pending",createdAt:serverTimestamp()});
+$("#oForm").hidden=true;$("#oDone").hidden=false;$("#oWA").href=wa('Bonjou, mwen peye "'+cur.title+'". ID tranzaksyon: '+x+'. Imèl: '+user.email);mine()}catch(e){alert("Erè: "+e.message)}};
+async function mine(){const b=$("#mine");if(!user){b.innerHTML='<p>Konekte ak Gmail ou pou wè liv ou yo ak kòmand ou yo.</p><button class="btn" onclick="login()">Konekte ak Google</button>';return}
+b.innerHTML=`<p>Konekte kòm <b>${esc(user.email)}</b> <button class="btn alt" onclick="logout()">Soti</button></p><h3>Liv mwen yo</h3><div id="lib">Ap chaje...</div><h3 style="margin-top:24px">Kòmand mwen yo</h3><div id="ords">Ap chaje...</div>`;
+try{const L=await getDocs(collection(db,"users",user.uid,"library"));
+const it=await Promise.all(L.docs.map(async d=>{let l="";try{l=(await getDoc(doc(db,"files",d.id))).data()?.link||""}catch(e){}return`<div class="card"><b>${esc(d.data().title)}</b><br>${l?`<a class="btn" href="${esc(l)}" target="_blank" rel="noopener">Telechaje</a>`:"<small>Lyen an poko disponib. Kontakte nou.</small>"}</div>`}));
+$("#lib").innerHTML=it.join("")||"<p>Ou poko gen liv. Yo ap parèt isit la apre nou apwouve peman ou.</p>"}catch(e){$("#lib").textContent="Erè chajman."}
+try{const O=await getDocs(query(collection(db,"orders"),where("userId","==",user.uid)));$("#ords").innerHTML=O.docs.map(d=>{const o=d.data();return`<div class="card"><b>${esc(o.bookTitle)}</b> · ${esc(o.amount)}<br><small>${o.status=="pending"?"⏳ An atant verifikasyon":o.status=="approved"?"✅ Apwouve":"❌ Rejte"}</small></div>`}).join("")||"<p>Pa gen kòmand.</p>"}catch(e){$("#ords").textContent="Erè chajman."}}
+onAuthStateChanged(auth,u=>{user=u;mine()});
+$("#msgbtn").onclick=async()=>{const m={name:$("#n").value.trim(),email:$("#e").value.trim(),whatsapp:$("#t").value.trim(),text:$("#m").value.trim(),createdAt:serverTimestamp(),replied:false};
+if(!m.name||!m.text||(!m.email&&!m.whatsapp))return alert("Mete non ou, mesaj la, ak yon WhatsApp oswa yon imèl.");
+try{await addDoc(collection(db,"messages"),m);["n","e","t","m"].forEach(i=>$("#"+i).value="");alert("Mesaj ou voye ✅ Nou pral reponn ou talè.")}catch(e){alert("Erè: "+e.message)}};
 </script>
 </body>
 </html>
